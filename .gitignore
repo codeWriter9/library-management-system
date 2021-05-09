@@ -1,14 +1,28 @@
+# https://github.com/github/gitignore/blob/master/Java.gitignore
 # Compiled class file
 *.class
+
+
+# Unit test reports
+*.lst
+*Test*.xml
+*Test*.txt
+
 
 # Log file
 *.log
 
+
+
 # BlueJ files
 *.ctxt
 
+
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+
+
 
 # Package Files #
 *.jar
@@ -19,5 +33,17 @@
 *.tar.gz
 *.rar
 
+
+
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+#eclipse file(s)
+.classpath
+.project
+.*.prefs
+../
+../*
+target
+target/*
