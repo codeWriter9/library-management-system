@@ -1,8 +1,9 @@
-package com.ghosh.sanjay.enums;
+package com.ghosh.sanjay.beans;
 
 import lombok.Builder;
 import lombok.Data;
 
+@Builder
 @Data
 public class Address {
 

@@ -28,16 +28,28 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 public class PersonTest {
 
+    private Person person1;
+    private Person person2;
+
+    private Address address1;
+    private Address address2;
+
     @BeforeAll
     static void initAll() {
     }
 
     @BeforeEach
     void init() {
+	address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+        address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+
+        person1 = Person.builder().name("").address(address1).email("").phone("").build();
+	person2 = Person.builder().name("").address(address2).email("").phone("").build();
     }
 
     @Test
     void succeedingTest() {
+	assertEquals( person1, person2 );
     }
 
     @Test
