@@ -16,7 +16,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;  // collides with junit 4 Test
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.slf4j.Logger;
@@ -25,13 +25,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-public class PersonTest {
+public class BookTest {
 
-    private Person person1;
-    private Person person2;
-
-    private Address address1;
-    private Address address2;
+    private Book book1;
+    private Book book2;
+    private Book book3;
 
     @BeforeAll
     static void initAll() {
@@ -39,22 +37,41 @@ public class PersonTest {
 
     @BeforeEach
     void init() {
-	address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
-        address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+        book1 = new Book();
+	book1.setISBN("");
+	book1.setTitle("");
+	book1.setSubject("");
+	book1.setPublisher("");
+	book1.setLanguage("");
+	book1.setNumberOfPages(0);
 
-        person1 = Person.builder().name("").address(address1).email("").phone("").build();
-	person2 = Person.builder().name("").address(address2).email("").phone("").build();
+	book2 = new Book();
+        book2.setISBN("");
+        book2.setTitle("");
+        book2.setSubject("");
+        book2.setPublisher("");
+        book2.setLanguage("");
+        book2.setNumberOfPages(0);
+
+	book3 = new Book();
+        book3.setISBN("<NO-ISBN>");
+        book3.setTitle("");
+        book3.setSubject("");
+        book3.setPublisher("");
+        book3.setLanguage("");
+        book3.setNumberOfPages(0);
     }
 
     @Test
-    void equasTest() {
-	assertEquals( person1, person2 );
+    void equalsTest() {
+        assertEquals( book1, book2 );
     }
 
     @Test
     void notEqualsTest() {
-	assertNotEquals( person1, Person.builder().name("<No-Name>").address(address2).email("").phone("").build() );
+	assertNotEquals( book1, book3  );
     }
+
 
     @AfterEach
     void tearDown() {
@@ -63,4 +80,5 @@ public class PersonTest {
     @AfterAll
     static void tearDownAll() {
     }
+
 }

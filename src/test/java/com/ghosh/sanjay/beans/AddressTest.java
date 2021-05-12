@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
-//import org.junit.Test; // collides with Junit 5 Jupiter Test
 import org.junit.runner.RunWith;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,7 +16,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;  // collides with junit 4 Test
+import org.junit.jupiter.api.Test;  
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.slf4j.Logger;
@@ -42,26 +41,14 @@ public class AddressTest {
     }
 
     @Test
-    void succeedingTest() {
+    void equalsTest() {
 	assertEquals( address1, address2 );
     }
 
     @Test
-    void failingTest() {
-        //fail("a failing test"); // -- This Test will Fail
+    void notEqualsTest() {
+	assertNotEquals( address1, Address.builder().streetAddress("<No-Name>").city("").state("").zipCode("").country("").build() );
     }
-
-    //@Test
-    //@Disabled("for demonstration purposes")  //  -- uncommenting will lead to failure
-    //void skippedTest() {
-        // not executed
-    //}
-
-    //@Test
-    //void abortedTest() {
-        //assumeTrue("abc".contains("Z"));
-        //fail("test should have been aborted");
-    //}
 
     @AfterEach
     void tearDown() {

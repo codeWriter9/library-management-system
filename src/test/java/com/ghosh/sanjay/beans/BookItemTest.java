@@ -16,7 +16,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;  // collides with junit 4 Test
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.slf4j.Logger;
@@ -25,13 +25,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-public class PersonTest {
+public class BookItemTest {
 
-    private Person person1;
-    private Person person2;
-
-    private Address address1;
-    private Address address2;
+    private BookItem bookItem1;
+    private BookItem bookItem2;
 
     @BeforeAll
     static void initAll() {
@@ -39,21 +36,25 @@ public class PersonTest {
 
     @BeforeEach
     void init() {
-	address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
-        address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+        bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
+        bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
 
-        person1 = Person.builder().name("").address(address1).email("").phone("").build();
-	person2 = Person.builder().name("").address(address2).email("").phone("").build();
+
+	//private String barcode;
+        //private boolean isReferenceOnly;
+        //private Date borrowed;
+        //private Date dueDate;
+        //private double price;
     }
 
     @Test
-    void equasTest() {
-	assertEquals( person1, person2 );
+    void equalsTest() {
+        assertEquals( bookItem1, bookItem2 );
     }
 
     @Test
     void notEqualsTest() {
-	assertNotEquals( person1, Person.builder().name("<No-Name>").address(address2).email("").phone("").build() );
+        assertNotEquals( bookItem1, BookItem.builder().barcode("<barCode>").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build() );
     }
 
     @AfterEach
@@ -63,4 +64,5 @@ public class PersonTest {
     @AfterAll
     static void tearDownAll() {
     }
+
 }
