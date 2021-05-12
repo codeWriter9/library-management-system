@@ -39,12 +39,6 @@ public class BookItemTest {
         bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
         bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
 
-
-	//private String barcode;
-        //private boolean isReferenceOnly;
-        //private Date borrowed;
-        //private Date dueDate;
-        //private double price;
     }
 
     @Test

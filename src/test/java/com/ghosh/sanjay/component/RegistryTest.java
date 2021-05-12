@@ -1,4 +1,4 @@
-package com.ghosh.sanjay.service;
+package com.ghosh.sanjay.component;
 
 import static com.ghosh.sanjay.enums.AccountStatus.ACTIVE;
 import static java.lang.invoke.MethodHandles.lookup;
@@ -37,30 +37,30 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookCatalogService.class})
-public class BookCatalogServiceTest {
+@ContextConfiguration(classes = {Registry.class})
+public class RegistryTest {
 
 	@Autowired
-	private BookCatalogService bookCatalogService;
-
-	private BookItem bookItem1;
-	private BookItem bookItem2;
-
-	private Address address1;
-	private Address address2;
-
-	private Person person1;
-	private Person person2;
-
-	private Member member1;
-	private Member member2;
+	private Registry registry;
 	
-	@BeforeEach
-        public void before() {
-		bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
-	        bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
+	private BookItem bookItem1;
+        private BookItem bookItem2;
 
-		address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+        private Address address1;
+        private Address address2;
+
+        private Person person1;
+        private Person person2;
+
+        private Member member1;
+        private Member member2;
+
+        @BeforeEach
+        public void before() {
+                bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
+                bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
+
+                address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
 
                 person1 = Person.builder().name("<NAME-1>").address(address1).email("").phone("").build();
@@ -77,38 +77,42 @@ public class BookCatalogServiceTest {
                 member2.setPassword("");
                 member2.setStatus(ACTIVE);
                 member2.setPerson(person1);
+        }
+
+        @Test
+        public void testNotNull() {
+                assertNotNull( registry );
+        }
+
+        @Test
+        public void testAddBookItem() {
+		registry.addBookItem( bookItem1 );
+        }
+
+	@Test
+	public void testCheckoutBookItem() {
+		registry.checkoutBookItem( bookItem1 );
 	}
 
 	@Test
-	public void testNotNull() {
-		assertNotNull( bookCatalogService );
-	}
+        public void testBlockMember() {
+		registry.blockMember( member1  );
+        }
 
-	@Test
-	public void testAddBookItem() {
-		assertTrue( bookCatalogService.addBookItem( bookItem1 ) );
-	}
+        @Test
+        public void testUnBlockMember() {
+		registry.unBlockMember( member1 );
+        }
 
-	@Test
-	public void testBlockMember() {
-		assertTrue( bookCatalogService.blockMember( member1 )  );
-	}
-
-	@Test
-	public void testUnBlockMember() {
-		assertTrue( bookCatalogService.unBlockMember( member1 ) );
-	}
-
-	@AfterEach
-	public void after() {
-		bookItem1 = null;
-		bookItem2 = null;
-		address1 = null;
-		address2 = null;
-		person1 = null;
-		person2 = null;
-		member1 = null;
-		member2 = null;
-	}
-
+        @AfterEach
+        public void after() {
+                bookItem1 = null;
+                bookItem2 = null;
+                address1 = null;
+                address2 = null;
+                person1 = null;
+                person2 = null;
+                member1 = null;
+                member2 = null;
+        }	
 }
