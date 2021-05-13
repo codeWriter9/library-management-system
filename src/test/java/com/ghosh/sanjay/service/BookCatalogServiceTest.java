@@ -11,6 +11,7 @@ import com.ghosh.sanjay.enums.AccountStatus;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
+import com.ghosh.sanjay.component.Registry;
 
 import java.io.IOException;
 
@@ -37,11 +38,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookCatalogService.class})
+@ContextConfiguration(classes = {BookCatalogService.class, Registry.class})
 public class BookCatalogServiceTest {
 
 	@Autowired
 	private BookCatalogService bookCatalogService;
+
+	@Autowired
+	private Registry registry;
 
 	private BookItem bookItem1;
 	private BookItem bookItem2;
@@ -91,6 +95,7 @@ public class BookCatalogServiceTest {
 
 	@Test
 	public void testBlockMember() {
+		assertTrue( registry.addMember( member1 ) );
 		assertTrue( bookCatalogService.blockMember( member1 )  );
 	}
 

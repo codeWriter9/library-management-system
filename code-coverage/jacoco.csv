@@ -1,7 +1,7 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 library-management-system,com.ghosh.sanjay.config,AppConfig,0,3,0,0,0,1,0,1,0,1
-library-management-system,com.ghosh.sanjay.service,BookCatalogService,6,3,0,0,3,1,3,1,3,1
-library-management-system,com.ghosh.sanjay.enums,AccountStatus,0,54,0,0,0,6,0,1,0,1
+library-management-system,com.ghosh.sanjay.service,BookCatalogService,0,18,0,0,0,4,0,4,0,4
+library-management-system,com.ghosh.sanjay.enums,AccountStatus,0,64,0,0,0,7,0,1,0,1
 library-management-system,com.ghosh.sanjay.enums,Constants,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,ReservationStatus,44,0,0,0,5,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,BookStatus,44,0,0,0,5,0,1,0,1,0
@@ -16,6 +16,7 @@ library-management-system,com.ghosh.sanjay.beans,Person.PersonBuilder,10,35,0,0,
 library-management-system,com.ghosh.sanjay.beans,Address,137,117,32,14,0,7,29,10,7,9
 library-management-system,com.ghosh.sanjay.beans,Book,128,130,33,15,0,7,25,16,2,15
 library-management-system,com.ghosh.sanjay,LibraryManagementSystem,0,17,0,0,0,6,0,4,0,4
+library-management-system,com.ghosh.sanjay.component,Registry,10,119,8,8,5,23,8,7,0,7
 library-management-system,com.ghosh.sanjay.actor,Account,98,99,26,12,1,5,21,12,3,11
 library-management-system,com.ghosh.sanjay.actor,Member,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.actor,Librarian,0,3,0,0,0,1,0,1,0,1
