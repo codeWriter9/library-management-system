@@ -1,4 +1,4 @@
-package com.ghosh.sanjay.component;
+package com.ghosh.sanjay.service;
 
 import static com.ghosh.sanjay.enums.AccountStatus.ACTIVE;
 import static java.lang.invoke.MethodHandles.lookup;
@@ -11,6 +11,7 @@ import com.ghosh.sanjay.enums.AccountStatus;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
+import com.ghosh.sanjay.component.Registry;
 
 import java.io.IOException;
 
@@ -37,13 +38,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {Registry.class})
-public class RegistryTest {
+@ContextConfiguration(classes = {BookLendingService.class, Registry.class})
+public class BookLendingServiceTest {
+	
+	@Autowired
+	private BookLendingService bookLendingService;
 
 	@Autowired
 	private Registry registry;
 	
-	private BookItem bookItem1;
+	 private BookItem bookItem1;
         private BookItem bookItem2;
 
         private Address address1;
@@ -67,13 +71,13 @@ public class RegistryTest {
                 person2 = Person.builder().name("<NAME-2>").address(address2).email("").phone("").build();
 
                 member1 = new Member();
-                member1.setId("1");
+                member1.setId("");
                 member1.setPassword("");
                 member1.setStatus(ACTIVE);
                 member1.setPerson(person1);
 
                 member2 = new Member();
-                member2.setId("2");
+                member2.setId("");
                 member2.setPassword("");
                 member2.setStatus(ACTIVE);
                 member2.setPerson(person1);
@@ -81,39 +85,19 @@ public class RegistryTest {
 
         @Test
         public void testNotNull() {
-                assertNotNull( registry );
-        }
-
-        @Test
-        public void testAddBookItem() {
-		assertTrue( registry.addBookItem( bookItem1 ) );
+		assertNotNull( registry );
+                assertNotNull( bookLendingService );
         }
 
 	@Test
 	public void testCheckoutBookItem() {
-		assertTrue( registry.addBookItem( bookItem1 ) );
-		assertTrue( registry.checkoutBookItem( bookItem1 ) );
-	}
-	
-	@Test
-	public void testAddMember() {
-		assertTrue( registry.addMember( member1 ) );
+		registry.addBookItem( bookItem1 );
+		assertTrue( bookLendingService.checkoutBookItem( bookItem1 ) );
 	}
 
-	@Test
-        public void testBlockMember() {
-		registry.addMember( member1 );
-		assertTrue( registry.blockMember( member1  ) );
-        }
 
-        @Test
-        public void testUnBlockMember() {
-		registry.addMember( member1 );
-                assertTrue( registry.blockMember( member1  ) );
-		assertTrue( registry.unBlockMember( member1 ) );
-        }
 
-        @AfterEach
+	@AfterEach
         public void after() {
                 bookItem1 = null;
                 bookItem2 = null;
@@ -123,6 +107,7 @@ public class RegistryTest {
                 person2 = null;
                 member1 = null;
                 member2 = null;
-		registry.resetCache();
         }	
+	
+
 }
