@@ -21,6 +21,7 @@ public class BookItem extends Book {
 	private Date dateOfPurchase;
 	private Date publicationDate;
 	private Rack placedAt;
+	private Integer copies;
 
 
 }

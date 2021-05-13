@@ -57,8 +57,8 @@ public class RegistryTest {
 
         @BeforeEach
         public void before() {
-                bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
-                bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).build();
+                bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(2).build();
+                bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
 
                 address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
@@ -86,7 +86,7 @@ public class RegistryTest {
 
         @Test
         public void testAddBookItem() {
-		assertTrue( registry.addBookItem( bookItem1 ) );
+		assertTrue( registry.addBookItem( bookItem2 ) );
         }
 
 	@Test

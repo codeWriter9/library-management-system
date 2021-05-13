@@ -16,6 +16,8 @@ public class Registry {
 
 	private Map<String, BookItem> bookItems = new HashMap<>();
 	private Map<String, Member> members = new HashMap<>();
+	private Map<String, Integer> barCodeToCopies = new HashMap();
+	private Map<String, Integer> memberIdToFines = new HashMap();
 
 	void resetCache() {
 		bookItems.clear();
@@ -25,14 +27,16 @@ public class Registry {
 	public boolean addBookItem(BookItem bookItem) {
 		if(!bookItems.containsKey(bookItem.getBarcode())) {
                         bookItems.put(bookItem.getBarcode(), bookItem);
+			barCodeToCopies.put(bookItem.getBarcode(), bookItem.getCopies());
                         return true;
                 }
                 return false;
 	}
 
  	public boolean checkoutBookItem(BookItem bookItem) {
-		if(bookItems.containsKey(bookItem.getBarcode()) && bookItems.get(bookItem.getBarcode()) != null) {
-			bookItems.put(bookItem.getBarcode(), null);
+		if(bookItems.containsKey(bookItem.getBarcode()) && barCodeToCopies.get(bookItem.getBarcode()) != 0) {
+			//bookItems.put(bookItem.getBarcode(), null);
+			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) -  1);
 			return true;
 		}
 		return false;
