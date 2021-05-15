@@ -11,6 +11,7 @@ import com.ghosh.sanjay.enums.AccountStatus;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
+import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 
 import java.io.IOException;
 
@@ -90,7 +91,7 @@ public class RegistryTest {
         }
 
 	@Test
-	public void testCheckoutBookItem() {
+	public void testCheckoutBookItem() throws BookAlreadyCheckedoutException  {
 		assertTrue( registry.addBookItem( bookItem1 ) );
 		assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
 	}

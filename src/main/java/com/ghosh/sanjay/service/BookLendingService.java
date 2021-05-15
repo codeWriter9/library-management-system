@@ -3,6 +3,8 @@ package com.ghosh.sanjay.service;
 import com.ghosh.sanjay.actor.Member;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.component.Registry;
+import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +15,7 @@ public class BookLendingService {
 	private Registry registry;
 
 
-	public boolean checkoutBookItem(BookItem bookItem, Member member) {
+	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException  {
 		return registry.checkoutBookItem( bookItem, member );
 	}
 

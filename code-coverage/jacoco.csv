@@ -7,6 +7,7 @@ library-management-system,com.ghosh.sanjay.enums,Constants,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,ReservationStatus,44,0,0,0,5,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,BookStatus,44,0,0,0,5,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,BookFormat,74,0,0,0,8,0,1,0,1,0
+library-management-system,com.ghosh.sanjay.exceptions,BookAlreadyCheckedoutException,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.beans,Person,110,101,25,13,0,6,23,10,6,8
 library-management-system,com.ghosh.sanjay.beans,Rack,54,54,10,6,0,4,12,6,4,6
 library-management-system,com.ghosh.sanjay.beans,BookItem,295,196,60,24,0,13,54,16,13,15
@@ -17,7 +18,7 @@ library-management-system,com.ghosh.sanjay.beans,Person.PersonBuilder,10,35,0,0,
 library-management-system,com.ghosh.sanjay.beans,Address,137,117,32,14,0,7,29,10,7,9
 library-management-system,com.ghosh.sanjay.beans,Book,128,130,33,15,0,7,25,16,2,15
 library-management-system,com.ghosh.sanjay,LibraryManagementSystem,0,17,0,0,0,6,0,4,0,4
-library-management-system,com.ghosh.sanjay.component,Registry,27,170,9,9,6,30,9,8,0,8
+library-management-system,com.ghosh.sanjay.component,Registry,10,174,8,10,5,30,8,9,0,8
 library-management-system,com.ghosh.sanjay.actor,Account,98,99,26,12,1,5,21,12,3,11
 library-management-system,com.ghosh.sanjay.actor,Member,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.actor,Librarian,0,3,0,0,0,1,0,1,0,1

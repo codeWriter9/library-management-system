@@ -5,6 +5,7 @@ import static com.ghosh.sanjay.enums.AccountStatus.BLOCKED;
 
 import com.ghosh.sanjay.actor.Member;
 import com.ghosh.sanjay.beans.BookItem;
+import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,15 +35,11 @@ public class Registry {
                 return false;
 	}
 
- 	public boolean checkoutBookItem(BookItem bookItem, Member member) {
+ 	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException {
 		if(bookItems.containsKey(bookItem.getBarcode()) && barCodeToCopies.get(bookItem.getBarcode()) != 0) {
-			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) -  1);
-			if(memberIdToCheckout.containsKey(member.getId())) {
-				memberIdToCheckout.put(member.getId(), memberIdToCheckout.get(member.getId()) + 1);
-			}
-			else {
-				 memberIdToCheckout.put(member.getId(), 1);
-			}
+			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) - 1);
+			if(memberIdToCheckout.containsKey(member.getId())) throw new BookAlreadyCheckedoutException();
+			else memberIdToCheckout.put(member.getId(), 1);
 			return true;
 		}
 		return false;
