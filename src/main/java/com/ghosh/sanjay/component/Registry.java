@@ -48,6 +48,16 @@ public class Registry {
 		return false;
 	}
 
+
+	public boolean checkinBookItem(BookItem bookItem, Member member) {
+		if(memberIdToCheckout.containsKey(member.getId()) && memberIdToCheckout.get(member.getId()) > 0 ) {
+			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) + 1);
+			memberIdToCheckout.put(member.getId(), memberIdToCheckout.get(member.getId()));
+			return true;
+		}
+		return false;
+	}
+
 	public boolean addMember(Member member) {
 		if(!members.containsKey(member.getId())) {
                         members.put(member.getId(), member);

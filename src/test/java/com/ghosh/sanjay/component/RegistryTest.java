@@ -95,6 +95,18 @@ public class RegistryTest {
 		assertTrue( registry.addBookItem( bookItem1 ) );
 		assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
 	}
+
+	@Test
+	public void testCheckinBookItemWithoutCheckout() {
+		assertFalse( registry.checkinBookItem( bookItem1, member1 ) );
+	}
+
+	@Test
+        public void testCheckinBookItem() throws BookAlreadyCheckedoutException {
+		assertTrue( registry.addBookItem( bookItem2 ) );
+                assertTrue( registry.checkoutBookItem( bookItem2, member2 ) );
+                assertTrue( registry.checkinBookItem( bookItem2, member2 ) );
+        }
 	
 	@Test
 	public void testAddMember() {
