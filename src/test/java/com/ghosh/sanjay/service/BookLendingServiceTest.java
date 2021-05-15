@@ -91,8 +91,8 @@ public class BookLendingServiceTest {
 
 	@Test
 	public void testCheckoutBookItem() {
-		registry.addBookItem( bookItem1 );
-		assertTrue( bookLendingService.checkoutBookItem( bookItem1 ) );
+		assertTrue( registry.addBookItem( bookItem1 ) );
+		assertTrue( bookLendingService.checkoutBookItem( bookItem1, member1 ) );
 	}
 
 

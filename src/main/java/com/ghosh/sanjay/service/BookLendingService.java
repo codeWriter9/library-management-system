@@ -13,8 +13,8 @@ public class BookLendingService {
 	private Registry registry;
 
 
-	public boolean checkoutBookItem(BookItem bookItem) {
-		return registry.checkoutBookItem( bookItem );
+	public boolean checkoutBookItem(BookItem bookItem, Member member) {
+		return registry.checkoutBookItem( bookItem, member );
 	}
 
 }

@@ -92,7 +92,7 @@ public class RegistryTest {
 	@Test
 	public void testCheckoutBookItem() {
 		assertTrue( registry.addBookItem( bookItem1 ) );
-		assertTrue( registry.checkoutBookItem( bookItem1 ) );
+		assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
 	}
 	
 	@Test
@@ -112,6 +112,12 @@ public class RegistryTest {
                 assertTrue( registry.blockMember( member1  ) );
 		assertTrue( registry.unBlockMember( member1 ) );
         }
+
+
+	@Test
+	public void testTotalCheckoutBooks() {
+		assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
+	}
 
         @AfterEach
         public void after() {

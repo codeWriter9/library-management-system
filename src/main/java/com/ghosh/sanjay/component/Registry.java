@@ -16,8 +16,9 @@ public class Registry {
 
 	private Map<String, BookItem> bookItems = new HashMap<>();
 	private Map<String, Member> members = new HashMap<>();
-	private Map<String, Integer> barCodeToCopies = new HashMap();
-	private Map<String, Integer> memberIdToFines = new HashMap();
+	private Map<String, Integer> barCodeToCopies = new HashMap<>();
+	private Map<String, Integer> memberIdToFines = new HashMap<>();
+	private Map<String, Integer> memberIdToCheckout = new HashMap<>();
 
 	void resetCache() {
 		bookItems.clear();
@@ -33,10 +34,15 @@ public class Registry {
                 return false;
 	}
 
- 	public boolean checkoutBookItem(BookItem bookItem) {
+ 	public boolean checkoutBookItem(BookItem bookItem, Member member) {
 		if(bookItems.containsKey(bookItem.getBarcode()) && barCodeToCopies.get(bookItem.getBarcode()) != 0) {
-			//bookItems.put(bookItem.getBarcode(), null);
 			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) -  1);
+			if(memberIdToCheckout.containsKey(member.getId())) {
+				memberIdToCheckout.put(member.getId(), memberIdToCheckout.get(member.getId()) + 1);
+			}
+			else {
+				 memberIdToCheckout.put(member.getId(), 1);
+			}
 			return true;
 		}
 		return false;
@@ -68,5 +74,8 @@ public class Registry {
 		return false;
 	}
 
+	public Integer totalCheckedoutBooks(Member member) {
+		return 0;
+	}
 
 }
