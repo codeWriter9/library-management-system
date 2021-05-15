@@ -120,6 +120,13 @@ public class RegistryTest {
 		assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
 	}
 
+	@Test
+        public void testTotalCheckoutBooks2() throws BookAlreadyCheckedoutException {
+		assertTrue( registry.addBookItem( bookItem1 ) );
+                assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
+                assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(1));
+        }
+
         @AfterEach
         public void after() {
                 bookItem1 = null;

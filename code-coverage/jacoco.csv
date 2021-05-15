@@ -18,7 +18,7 @@ library-management-system,com.ghosh.sanjay.beans,Person.PersonBuilder,10,35,0,0,
 library-management-system,com.ghosh.sanjay.beans,Address,137,117,32,14,0,7,29,10,7,9
 library-management-system,com.ghosh.sanjay.beans,Book,128,130,33,15,0,7,25,16,2,15
 library-management-system,com.ghosh.sanjay,LibraryManagementSystem,0,17,0,0,0,6,0,4,0,4
-library-management-system,com.ghosh.sanjay.component,Registry,10,174,8,10,5,30,8,9,0,8
+library-management-system,com.ghosh.sanjay.component,Registry,10,202,9,13,5,35,9,10,0,8
 library-management-system,com.ghosh.sanjay.actor,Account,98,99,26,12,1,5,21,12,3,11
 library-management-system,com.ghosh.sanjay.actor,Member,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.actor,Librarian,0,3,0,0,0,1,0,1,0,1

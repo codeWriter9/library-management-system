@@ -24,6 +24,9 @@ public class Registry {
 	void resetCache() {
 		bookItems.clear();
 		members.clear();
+		barCodeToCopies.clear();
+		memberIdToFines.clear();
+		memberIdToCheckout.clear();
 	}
 
 	public boolean addBookItem(BookItem bookItem) {
@@ -72,6 +75,9 @@ public class Registry {
 	}
 
 	public Integer totalCheckedoutBooks(Member member) {
+		if(memberIdToCheckout.containsKey(member.getId()) && memberIdToCheckout.get(member.getId()) != null) {
+			return memberIdToCheckout.get(member.getId());
+		}
 		return 0;
 	}
 
