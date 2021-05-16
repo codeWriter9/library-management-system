@@ -97,6 +97,18 @@ public class BookLendingServiceTest {
 	}
 
 	@Test
+        public void testCheckinBookItemWithoutCheckout() {
+                assertFalse( bookLendingService.checkinBookItem( bookItem1, member1 ) );
+        }
+
+        @Test
+        public void testCheckinBookItem() throws BookAlreadyCheckedoutException {
+                assertTrue( registry.addBookItem( bookItem2 ) );
+                assertTrue( bookLendingService.checkoutBookItem( bookItem2, member2 ) );
+                assertTrue( bookLendingService.checkinBookItem( bookItem2, member2 ) );
+        }
+
+	@Test
         public void testTotalCheckoutBooks() {
                 assertEquals( bookLendingService.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
         }

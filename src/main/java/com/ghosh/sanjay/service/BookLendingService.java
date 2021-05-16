@@ -23,4 +23,9 @@ public class BookLendingService {
 		return registry.totalCheckedoutBooks(member);
 	}
 
+	public boolean checkinBookItem(BookItem bookItem, Member member) {
+		return registry.checkinBookItem( bookItem, member );
+	}
+	
+
 }
