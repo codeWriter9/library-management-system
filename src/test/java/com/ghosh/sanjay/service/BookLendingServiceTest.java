@@ -96,6 +96,18 @@ public class BookLendingServiceTest {
 		assertTrue( bookLendingService.checkoutBookItem( bookItem1, member1 ) );
 	}
 
+	@Test
+        public void testTotalCheckoutBooks() {
+                assertEquals( bookLendingService.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
+        }
+
+        @Test
+        public void testTotalCheckoutBooks2() throws BookAlreadyCheckedoutException {
+                assertTrue( registry.addBookItem( bookItem1 ) );
+                assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
+                assertEquals( bookLendingService.totalCheckedoutBooks( member1 ), Integer.valueOf(1));
+        }
+
 
 
 	@AfterEach
@@ -108,6 +120,7 @@ public class BookLendingServiceTest {
                 person2 = null;
                 member1 = null;
                 member2 = null;
+		registry.resetCache();
         }	
 	
 

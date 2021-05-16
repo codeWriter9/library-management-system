@@ -21,7 +21,7 @@ public class Registry {
 	private Map<String, Integer> memberIdToFines = new HashMap<>();
 	private Map<String, Integer> memberIdToCheckout = new HashMap<>();
 
-	void resetCache() {
+	public void resetCache() {
 		bookItems.clear();
 		members.clear();
 		barCodeToCopies.clear();

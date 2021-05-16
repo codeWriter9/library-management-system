@@ -18,5 +18,9 @@ public class BookLendingService {
 	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException  {
 		return registry.checkoutBookItem( bookItem, member );
 	}
+	
+	public Integer totalCheckedoutBooks(Member member) {
+		return registry.totalCheckedoutBooks(member);
+	}
 
 }
