@@ -1,4 +1,4 @@
-package com.ghosh.sanjay.exception;
+package com.ghosh.sanjay.component;
 
 import static com.ghosh.sanjay.enums.AccountStatus.ACTIVE;
 import static java.lang.invoke.MethodHandles.lookup;
@@ -7,13 +7,12 @@ import static org.junit.jupiter.api.Assumptions.*;
 import static org.slf4j.LoggerFactory.getLogger;
 
 import com.ghosh.sanjay.actor.Member;
+import com.ghosh.sanjay.enums.AccountStatus;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
+import com.ghosh.sanjay.beans.BookLending;
 import com.ghosh.sanjay.beans.Person;
-import com.ghosh.sanjay.component.Registry;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
-import com.ghosh.sanjay.service.BookLendingService;
-import com.ghosh.sanjay.service.BookCatalogService;
 
 import java.io.IOException;
 
@@ -40,14 +39,12 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, Registry.class, BookCatalogService.class})
-public class ExceptionTests {
+@ContextConfiguration(classes = {Ledger.class})
+public class LedgerTest {
+
 
 	@Autowired
-	private Registry registry;
-
-	@Autowired
-        private BookLendingService bookLendingService;
+	private Ledger ledger;
 
 	private BookItem bookItem1;
         private BookItem bookItem2;
@@ -61,17 +58,22 @@ public class ExceptionTests {
         private Member member1;
         private Member member2;
 
+	private BookLending bookLending1;
+	private BookLending bookLending2;
 
-	@BeforeEach
+        @BeforeEach
         public void before() {
-                bookItem1 = BookItem.builder().barcode("B1").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(2).build();
-                bookItem2 = BookItem.builder().barcode("B2").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
+                bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(2).build();
+                bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
 
                 address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
 
                 person1 = Person.builder().name("<NAME-1>").address(address1).email("").phone("").build();
                 person2 = Person.builder().name("<NAME-2>").address(address2).email("").phone("").build();
+
+		bookLending1 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
+	        bookLending2 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
 
                 member1 = new Member();
                 member1.setId("1");
@@ -88,17 +90,19 @@ public class ExceptionTests {
 
 	@Test
         public void testNotNull() {
-                assertNotNull( registry );
-		assertNotNull( bookLendingService );
+                assertNotNull( ledger );
         }
-
 
 	@Test
-        public void testCheckoutBookItem() throws BookAlreadyCheckedoutException  {
-                assertTrue( registry.addBookItem( bookItem1 ) );
-                assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
-		assertThrows( BookAlreadyCheckedoutException.class, () -> registry.checkoutBookItem( bookItem1, member1 ) );
-        }
+	public void testBookFinePending() {
+		 assertTrue( ledger.addBookFine( member1, bookLending1 ) );
+		assertTrue( ledger.hasBookFinePending( member1 ) );
+	}
+	
+	@Test
+	public void testAddBookFine() {
+		assertTrue( ledger.addBookFine( member1, bookLending1 ) );
+	}
 
 
 	@AfterEach
@@ -111,9 +115,7 @@ public class ExceptionTests {
                 person2 = null;
                 member1 = null;
                 member2 = null;
-                //registry.resetCache();
         }
-
-
+	
 
 }
