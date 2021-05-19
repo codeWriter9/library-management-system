@@ -9,7 +9,6 @@ import java.io.IOException;
 
 import org.junit.After;
 import org.junit.Before;
-//import org.junit.Test; // collides with Junit 5 Jupiter Test
 import org.junit.runner.RunWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +17,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;  // collides with junit 4 Test
+import org.junit.jupiter.api.Test;  
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -29,7 +28,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @ExtendWith(MockitoExtension.class)
-//@RunWith(JUnitPlatform.class)
 public class RecoverableAccountTest {
 
 	@Mock 

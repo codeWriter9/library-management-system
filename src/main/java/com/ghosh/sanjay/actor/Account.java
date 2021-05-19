@@ -14,7 +14,7 @@ public class Account implements RecoverableAccount {
 
 
 	public boolean resetPassword() {
-		return false; // default implementation
+		return false; 
 	}
 
 }
