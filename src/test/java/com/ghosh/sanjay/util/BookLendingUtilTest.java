@@ -16,6 +16,10 @@ import com.ghosh.sanjay.beans.Person;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
+import java.time.ZoneId;
 
 import org.junit.After;
 import org.junit.Before;
@@ -56,25 +60,22 @@ public class BookLendingUtilTest {
     void init() {
 	bookFine1 = BookFine.builder().amount(0.0).build();
         bookFine2 = BookFine.builder().amount(0.0).build();
+	ZonedDateTime returnDate = LocalDate.of(2021, 05, 19).atStartOfDay( ZoneId.of("UTC") );
+	ZonedDateTime dueDate = LocalDateTime.of(2021, 05, 14, 0, 0).atZone( ZoneId.of("UTC") );
+	ZonedDateTime creationDate = LocalDateTime.of(2021, 05, 01, 0, 0).atZone( ZoneId.of("UTC") );
 	bookLending1 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
-        bookLending2 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
+        bookLending2 = BookLending.builder().creationDate(creationDate).dueDate(dueDate).returnDate(returnDate).bookItemBarcode("").memberId("1").build();
     }
 
-    @Test
-    void equalsTest() {
-        assertEquals( bookFine1, bookFine2 );
-	assertEquals( bookLending1, bookLending2 );
-    }
-
-    @Test
-    void notEqualsTest() {
-        assertNotEquals( bookFine1, BookFine.builder().amount(1.0).build() );
-	assertNotEquals( bookLending1, BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("2").build() );
-    }
 
     @Test
     void testCalculateFine() {
 	assertEquals( BookLendingUtil.calculateFine( bookLending1 ).getAmount(), Double.valueOf(0.0));
+    }
+
+    @Test
+    void testCalculateFine2() {
+        assertEquals( BookLendingUtil.calculateFine( bookLending2 ).getAmount(), Double.valueOf(5.0) );
     }
 
 

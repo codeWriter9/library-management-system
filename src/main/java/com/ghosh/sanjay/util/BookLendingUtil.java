@@ -10,8 +10,8 @@ public class BookLendingUtil {
 
 	public static BookFine calculateFine(BookLending bookLending) {
 		Double amount = 0.0;
-		if(bookLending.getCreationDate() != null || bookLending.getDueDate() != null) {
-			amount =  DAYS.between(bookLending.getCreationDate(), bookLending.getDueDate()) * 1.0;
+		if(bookLending.getReturnDate() != null && bookLending.getDueDate() != null) {
+			amount =  DAYS.between(bookLending.getDueDate(), bookLending.getReturnDate()) * 1.0;
 		}
 		return BookFine.builder().amount(amount).build();
 	}
