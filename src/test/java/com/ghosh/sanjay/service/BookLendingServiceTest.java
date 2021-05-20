@@ -10,9 +10,12 @@ import com.ghosh.sanjay.actor.Member;
 import com.ghosh.sanjay.enums.AccountStatus;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
+import com.ghosh.sanjay.beans.BookLending;
 import com.ghosh.sanjay.beans.Person;
+import com.ghosh.sanjay.component.Ledger;
 import com.ghosh.sanjay.component.Registry;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
+import com.ghosh.sanjay.exceptions.BookFinePendingException;
 
 import java.io.IOException;
 
@@ -39,7 +42,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, Registry.class})
+@ContextConfiguration(classes = {BookLendingService.class, Registry.class, Ledger.class})
 public class BookLendingServiceTest {
 	
 	@Autowired
@@ -47,6 +50,9 @@ public class BookLendingServiceTest {
 
 	@Autowired
 	private Registry registry;
+
+	@Autowired
+	private Ledger ledger;
 	
 	private BookItem bookItem1;
         private BookItem bookItem2;
@@ -60,6 +66,9 @@ public class BookLendingServiceTest {
         private Member member1;
         private Member member2;
 
+	private BookLending bookLending1;
+	private BookLending bookLending2;
+
         @BeforeEach
         public void before() {
                 bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
@@ -70,6 +79,9 @@ public class BookLendingServiceTest {
 
                 person1 = Person.builder().name("<NAME-1>").address(address1).email("").phone("").build();
                 person2 = Person.builder().name("<NAME-2>").address(address2).email("").phone("").build();
+
+		bookLending1 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
+                bookLending2 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
 
                 member1 = new Member();
                 member1.setId("");
@@ -87,6 +99,7 @@ public class BookLendingServiceTest {
         @Test
         public void testNotNull() {
 		assertNotNull( registry );
+		assertNotNull( ledger );
                 assertNotNull( bookLendingService );
         }
 
@@ -103,6 +116,13 @@ public class BookLendingServiceTest {
 
         @Test
         public void testCheckinBookItem() throws BookAlreadyCheckedoutException {
+                assertTrue( registry.addBookItem( bookItem2 ) );
+                assertTrue( bookLendingService.checkoutBookItem( bookItem2, member2 ) );
+                assertTrue( bookLendingService.checkinBookItem( bookItem2, member2 ) );
+        }
+
+	@Test
+        public void testCheckinBookItemPendingFine() throws BookAlreadyCheckedoutException, BookFinePendingException {
                 assertTrue( registry.addBookItem( bookItem2 ) );
                 assertTrue( bookLendingService.checkoutBookItem( bookItem2, member2 ) );
                 assertTrue( bookLendingService.checkinBookItem( bookItem2, member2 ) );

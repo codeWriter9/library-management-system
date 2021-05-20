@@ -10,8 +10,10 @@ import com.ghosh.sanjay.actor.Member;
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
+import com.ghosh.sanjay.component.Ledger;
 import com.ghosh.sanjay.component.Registry;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
+import com.ghosh.sanjay.exceptions.BookFinePendingException;
 import com.ghosh.sanjay.service.BookLendingService;
 import com.ghosh.sanjay.service.BookCatalogService;
 
@@ -40,14 +42,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, Registry.class, BookCatalogService.class})
+@ContextConfiguration(classes = {BookLendingService.class, Registry.class, Ledger.class, BookCatalogService.class})
 public class ExceptionTests {
 
 	@Autowired
 	private Registry registry;
 
 	@Autowired
+	private Ledger ledger;
+
+	@Autowired
         private BookLendingService bookLendingService;
+
+	@Autowired
+	private BookCatalogService bookCatalogService;
 
 	private BookItem bookItem1;
         private BookItem bookItem2;
@@ -100,6 +108,10 @@ public class ExceptionTests {
 		assertThrows( BookAlreadyCheckedoutException.class, () -> registry.checkoutBookItem( bookItem1, member1 ) );
         }
 
+	@Test
+	public void testBookFinePending() throws BookFinePendingException {
+	}
+
 
 	@AfterEach
         public void after() {
@@ -111,7 +123,6 @@ public class ExceptionTests {
                 person2 = null;
                 member1 = null;
                 member2 = null;
-                //registry.resetCache();
         }
 
 
