@@ -16,6 +16,7 @@ import com.ghosh.sanjay.component.Ledger;
 import com.ghosh.sanjay.component.Registry;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 import com.ghosh.sanjay.exceptions.BookFinePendingException;
+import com.ghosh.sanjay.util.BookLendingUtil;
 
 import java.io.IOException;
 
@@ -42,7 +43,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, Registry.class, Ledger.class})
+@ContextConfiguration(classes = {BookLendingService.class, BookLendingUtil.class, Registry.class, Ledger.class})
 public class BookLendingServiceTest {
 	
 	@Autowired
@@ -53,6 +54,9 @@ public class BookLendingServiceTest {
 
 	@Autowired
 	private Ledger ledger;
+
+	@Autowired
+	private BookLendingUtil bookLendingUtil;
 	
 	private BookItem bookItem1;
         private BookItem bookItem2;

@@ -7,6 +7,8 @@ import static com.ghosh.sanjay.LibraryManagementSystem.main;
 import java.io.IOException;
 
 import com.ghosh.sanjay.LibraryManagementSystem;
+import com.ghosh.sanjay.util.BookLendingUtil;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
