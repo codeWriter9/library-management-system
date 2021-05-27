@@ -29,6 +29,20 @@ public class Registry {
 		memberIdToCheckout.clear();
 	}
 
+	public BookItem fetchBookDetails(String barcode) {		
+		return bookItems.get( barcode );
+	}
+
+	public boolean isBookAvailable( String barcode ) {
+		if(barcode != null && !"".equals(barcode)) {
+			if( bookItems.get( barcode ) != null ) {
+				return true;
+			} 
+		}
+		return false;
+	}
+	
+
 	public boolean addBookItem(BookItem bookItem) {
 		if(!bookItems.containsKey(bookItem.getBarcode())) {
                         bookItems.put(bookItem.getBarcode(), bookItem);

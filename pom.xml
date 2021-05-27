@@ -15,6 +15,7 @@
 		<maven.compiler.target>11</maven.compiler.target>
 		<spring-boot-version>2.2.5.RELEASE</spring-boot-version>
 		<fasterxml-jackson-version>2.12.0</fasterxml-jackson-version>
+		<micrometer.version></micrometer.version>
 	</properties>
 
 	<parent>
@@ -31,7 +32,11 @@
 
 
 	<dependencies>
-
+		<dependency>
+		    <groupId>io.micrometer</groupId>
+		    <artifactId>micrometer-core</artifactId>
+		    <version>1.6.0</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -55,6 +60,11 @@
 			<version>${spring-boot-version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>  
+      			<groupId>org.springframework.boot</groupId>  
+		        <artifactId>spring-boot-starter-actuator</artifactId>  
+		        <version>${spring-boot-version}</version>  
+	        </dependency>  
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>

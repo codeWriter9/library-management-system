@@ -12,6 +12,7 @@ import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
+import com.ghosh.sanjay.exceptions.BookNotFoundException;
 
 import java.io.IOException;
 
@@ -58,8 +59,8 @@ public class RegistryTest {
 
         @BeforeEach
         public void before() {
-                bookItem1 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(2).build();
-                bookItem2 = BookItem.builder().barcode("").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
+                bookItem1 = BookItem.builder().barcode("1234567890").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(2).build();
+                bookItem2 = BookItem.builder().barcode("1234567890").referenceOnly(false).borrowed(null).dueDate(null).price(0.0).copies(1).build();
 
                 address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
@@ -138,6 +139,21 @@ public class RegistryTest {
                 assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
                 assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(1));
         }
+
+	@Test
+	public void testSearchBook() throws BookNotFoundException {
+		assertTrue( registry.addBookItem( bookItem1 ) );
+		assertTrue( registry.isBookAvailable( bookItem1.getBarcode() ) );
+	}
+
+	@Test
+	public void testFillBookDetails() {
+		assertTrue( registry.addBookItem( bookItem1 ) );
+		assertTrue( registry.isBookAvailable( bookItem1.getBarcode() ) );
+		assertEquals( registry.fetchBookDetails( bookItem1.getBarcode()), bookItem1 );
+	}
+
+
 
         @AfterEach
         public void after() {

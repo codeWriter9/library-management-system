@@ -1,5 +1,5 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-library-management-system,com.ghosh.sanjay.config,AppConfig,0,3,0,0,0,1,0,1,0,1
+library-management-system,com.ghosh.sanjay.config,AppConfig,0,20,0,0,0,2,0,3,0,3
 library-management-system,com.ghosh.sanjay.constants,Constants,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.util,BookLendingUtil,0,28,1,3,0,5,1,3,0,2
 library-management-system,com.ghosh.sanjay.service,BookCatalogService,0,18,0,0,0,4,0,4,0,4
@@ -10,9 +10,10 @@ library-management-system,com.ghosh.sanjay.enums,BookFormat,74,0,0,0,8,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,BookStatus,44,0,0,0,5,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.exceptions,BookFinePendingException,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.exceptions,BookAlreadyCheckedoutException,0,3,0,0,0,1,0,1,0,1
+library-management-system,com.ghosh.sanjay.exceptions,BookNotFoundException,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.beans,Person,110,101,25,13,0,6,23,10,6,8
 library-management-system,com.ghosh.sanjay.beans,Rack,54,54,10,6,0,4,12,6,4,6
-library-management-system,com.ghosh.sanjay.beans,BookItem,295,196,60,24,0,13,54,16,13,15
+library-management-system,com.ghosh.sanjay.beans,BookItem,293,198,59,25,0,13,53,17,13,15
 library-management-system,com.ghosh.sanjay.beans,BookFine,37,45,8,6,0,3,9,6,3,5
 library-management-system,com.ghosh.sanjay.beans,BookFine.BookFineBuilder,4,14,0,0,0,1,1,3,1,3
 library-management-system,com.ghosh.sanjay.beans,Address,137,117,32,14,0,7,29,10,7,9
@@ -25,7 +26,7 @@ library-management-system,com.ghosh.sanjay.beans,Book,128,130,33,15,0,7,25,16,2,
 library-management-system,com.ghosh.sanjay.beans,BookLending.BookLendingBuilder,12,42,0,0,0,1,1,7,1,7
 library-management-system,com.ghosh.sanjay,LibraryManagementSystem,0,17,0,0,0,6,0,4,0,4
 library-management-system,com.ghosh.sanjay.component,Ledger,0,23,0,0,0,5,0,3,0,3
-library-management-system,com.ghosh.sanjay.component,Registry,10,248,10,16,5,40,10,12,0,9
+library-management-system,com.ghosh.sanjay.component,Registry,12,267,13,19,6,44,13,14,0,11
 library-management-system,com.ghosh.sanjay.actor,Librarian,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.actor,Account,98,99,26,12,1,5,21,12,3,11
 library-management-system,com.ghosh.sanjay.actor,Member,0,3,0,0,0,1,0,1,0,1
