@@ -14,6 +14,7 @@ import com.ghosh.sanjay.component.Ledger;
 import com.ghosh.sanjay.component.Registry;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 import com.ghosh.sanjay.exceptions.BookFinePendingException;
+import com.ghosh.sanjay.exceptions.MemberCheckoutLimitExceededException;
 import com.ghosh.sanjay.service.BookLendingService;
 import com.ghosh.sanjay.service.BookCatalogService;
 import com.ghosh.sanjay.util.BookLendingUtil;
@@ -106,7 +107,9 @@ public class ExceptionTests {
 
 
 	@Test
-        public void testCheckoutBookItem() throws BookAlreadyCheckedoutException  {
+	//@Disabled
+        public void testCheckoutBookItem() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException  {
+		assertTrue( registry.addMember( member1 ) );
                 assertTrue( registry.addBookItem( bookItem1 ) );
                 assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
 		assertThrows( BookAlreadyCheckedoutException.class, () -> registry.checkoutBookItem( bookItem1, member1 ) );
