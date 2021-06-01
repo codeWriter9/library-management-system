@@ -70,8 +70,8 @@ public class RegistryTest {
                 address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
 
-                person1 = Person.builder().name("<NAME-1>").address(address1).email("").phone("").build();
-                person2 = Person.builder().name("<NAME-2>").address(address2).email("").phone("").build();
+                person1 = Person.builder().name("P1").address(address1).email("").phone("").build();
+                person2 = Person.builder().name("P2>").address(address2).email("").phone("").build();
 
                 member1 = new Member();
                 member1.setId("1");
@@ -97,7 +97,6 @@ public class RegistryTest {
         }
 
 	@Test
-	//@Disabled
 	public void testCheckoutBookItem() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException  {
 		assertTrue( registry.addMember( member1 ) );
 		assertTrue( registry.addBookItem( bookItem1 ) );
@@ -111,17 +110,10 @@ public class RegistryTest {
 
 	@Test
         public void testCheckinBookItem() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
-		try {
 		assertTrue( registry.addMember( member1 ) );
 		assertTrue( registry.addMember( member2 ) );
 		assertTrue( registry.addBookItem( bookItem2 ) );
 		assertTrue( registry.checkoutBookItem( bookItem2, member2 ) );
-               	//assertThrows( BookAlreadyCheckedoutException.class, () -> registry.checkoutBookItem( bookItem2, member2 ) );
-               	//assertTrue( registry.checkinBookItem( bookItem2, member2 ) );
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
         }
 	
 	@Test
@@ -144,22 +136,23 @@ public class RegistryTest {
 
 
 	@Test
-	//@Disabled
 	public void testTotalCheckoutBooks() {
 		assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
 	}
 
 	@Test
-	@Disabled
         public void testTotalCheckoutBooks2() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
 		assertTrue( registry.addBookItem( bookItem1 ) );
                 assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
                 assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(1));
         }
 
 	@Test
-	@Disabled
         public void testTotalCheckoutBooks3() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
                 assertTrue( registry.addBookItem( bookItem1 ) );
 		assertTrue( registry.addBookItem( bookItem2 ) );
 		assertTrue( registry.addBookItem( bookItem3 ) );

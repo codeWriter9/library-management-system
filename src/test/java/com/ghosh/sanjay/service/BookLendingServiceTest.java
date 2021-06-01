@@ -90,13 +90,13 @@ public class BookLendingServiceTest {
                 bookLending2 = BookLending.builder().creationDate(null).dueDate(null).returnDate(null).bookItemBarcode("").memberId("1").build();
 
                 member1 = new Member();
-                member1.setId("");
+                member1.setId("1");
                 member1.setPassword("");
                 member1.setStatus(ACTIVE);
                 member1.setPerson(person1);
 
                 member2 = new Member();
-                member2.setId("");
+                member2.setId("2");
                 member2.setPassword("");
                 member2.setStatus(ACTIVE);
                 member2.setPerson(person1);
@@ -110,43 +110,45 @@ public class BookLendingServiceTest {
         }
 
 	@Test
-	@Disabled
 	public void testCheckoutBookItem() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException  {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
 		assertTrue( registry.addBookItem( bookItem1 ) );
 		assertTrue( bookLendingService.checkoutBookItem( bookItem1, member1 ) );
 	}
 
 	@Test
-	@Disabled
         public void testCheckinBookItemWithoutCheckout() {
                 assertFalse( bookLendingService.checkinBookItem( bookItem1, member1 ) );
         }
 
         @Test
-	@Disabled
         public void testCheckinBookItem() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
                 assertTrue( registry.addBookItem( bookItem2 ) );
                 assertTrue( bookLendingService.checkoutBookItem( bookItem2, member2 ) );
                 assertTrue( bookLendingService.checkinBookItem( bookItem2, member2 ) );
         }
 
 	@Test
-	@Disabled
         public void testCheckinBookItemPendingFine() throws BookAlreadyCheckedoutException, BookFinePendingException, MemberCheckoutLimitExceededException {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
                 assertTrue( registry.addBookItem( bookItem2 ) );
                 assertTrue( bookLendingService.checkoutBookItem( bookItem2, member2 ) );
                 assertTrue( bookLendingService.checkinBookItem( bookItem2, member2 ) );
         }
 
 	@Test
-	@Disabled
         public void testTotalCheckoutBooks() {
                 assertEquals( bookLendingService.totalCheckedoutBooks( member1 ), Integer.valueOf(0));
         }
 
         @Test
-	@Disabled
         public void testTotalCheckoutBooks2() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
                 assertTrue( registry.addBookItem( bookItem1 ) );
                 assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
                 assertEquals( bookLendingService.totalCheckedoutBooks( member1 ), Integer.valueOf(1));

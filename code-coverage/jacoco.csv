@@ -3,7 +3,7 @@ library-management-system,com.ghosh.sanjay.config,AppConfig,0,20,0,0,0,2,0,3,0,3
 library-management-system,com.ghosh.sanjay.constants,Constants,3,0,0,0,1,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.util,BookLendingUtil,0,28,1,3,0,5,1,3,0,2
 library-management-system,com.ghosh.sanjay.service,BookCatalogService,0,18,0,0,0,4,0,4,0,4
-library-management-system,com.ghosh.sanjay.service,BookLendingService,17,13,0,0,3,3,3,3,3,3
+library-management-system,com.ghosh.sanjay.service,BookLendingService,0,30,0,0,0,6,0,6,0,6
 library-management-system,com.ghosh.sanjay.enums,AccountStatus,0,64,0,0,0,7,0,1,0,1
 library-management-system,com.ghosh.sanjay.enums,ReservationStatus,44,0,0,0,5,0,1,0,1,0
 library-management-system,com.ghosh.sanjay.enums,BookFormat,74,0,0,0,8,0,1,0,1,0
@@ -27,7 +27,7 @@ library-management-system,com.ghosh.sanjay.beans,Book,128,130,33,15,0,7,25,16,2,
 library-management-system,com.ghosh.sanjay.beans,BookLending.BookLendingBuilder,12,42,0,0,0,1,1,7,1,7
 library-management-system,com.ghosh.sanjay,LibraryManagementSystem,0,17,0,0,0,6,0,4,0,4
 library-management-system,com.ghosh.sanjay.component,Ledger,0,23,0,0,0,5,0,3,0,3
-library-management-system,com.ghosh.sanjay.component,Registry,82,282,20,18,12,47,18,12,0,11
+library-management-system,com.ghosh.sanjay.component,Registry,29,377,17,25,8,60,16,16,0,11
 library-management-system,com.ghosh.sanjay.actor,Librarian,0,3,0,0,0,1,0,1,0,1
 library-management-system,com.ghosh.sanjay.actor,Account,98,99,26,12,1,5,21,12,3,11
 library-management-system,com.ghosh.sanjay.actor,Member,0,3,0,0,0,1,0,1,0,1

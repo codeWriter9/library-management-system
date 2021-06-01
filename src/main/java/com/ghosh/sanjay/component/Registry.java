@@ -57,13 +57,16 @@ public class Registry {
 	}
 
  	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
-		//System.out.println("------------------------");
-		//System.out.println(">>>checkoutBookItem<<<");
-		//System.out.println(">>>memberIdToCheckout=" + memberIdToCheckout);
-		//System.out.println("------------------------");
 		if( bookItems.containsKey( bookItem.getBarcode()) && barCodeToCopies.get( bookItem.getBarcode()) != 0 ) {
-			if( memberIdToCheckout.containsKey( member.getId()) && memberIdToCheckout.get( member.getId() ).containsKey( bookItem.getBarcode()  ) ) throw new BookAlreadyCheckedoutException();
-			else if( memberIdToCheckout.get( member.getId()) != null && !memberIdToCheckout.get( member.getId()).isEmpty() && memberIdToCheckout.get( member.getId()).get( bookItem.getBarcode() ) > MEMBER_CHECKOUT_LIMIT ) throw new MemberCheckoutLimitExceededException();
+			if( memberIdToCheckout.containsKey( member.getId()) 
+				&& memberIdToCheckout.get( member.getId() ).containsKey( bookItem.getBarcode()  ) ) { 
+					throw new BookAlreadyCheckedoutException();
+			}
+			else if( memberIdToCheckout.get( member.getId()) != null 
+				&& !memberIdToCheckout.get( member.getId()).isEmpty()
+				&& memberIdToCheckout.get( member.getId()).get( bookItem.getBarcode() ) != null
+				&& memberIdToCheckout.get( member.getId()).get( bookItem.getBarcode() ) > MEMBER_CHECKOUT_LIMIT ) 
+					throw new MemberCheckoutLimitExceededException();
                         else {
 				barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) - 1);
 	                        memberIdToBarcode.put(bookItem.getBarcode(), member.getId());
@@ -92,10 +95,6 @@ public class Registry {
                         members.put(member.getId(), member);
 			memberIdToBarcode.put(member.getId(), "");
 			memberIdToCheckout.put(member.getId(), new HashMap<>());
-			//System.out.println("------------------------");
-	                //System.out.println(">>>addMember<<<");
-			//System.out.println("memberIdToCheckout=" + memberIdToCheckout);
-			//System.out.println("------------------------");
                         return true;
                 }
                 return false;
@@ -122,6 +121,9 @@ public class Registry {
 	public Integer totalCheckedoutBooks(Member member) {
 		if(memberIdToCheckout.containsKey(member.getId())) {
 			Integer sum = 0;
+			for(String barcode : memberIdToCheckout.get(member.getId()).keySet()) {
+				sum = sum +  memberIdToCheckout.get(member.getId()).get(barcode);
+			}
 			return sum;
 		}
 		return 0;
