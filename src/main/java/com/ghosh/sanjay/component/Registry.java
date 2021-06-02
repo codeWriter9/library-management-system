@@ -56,16 +56,22 @@ public class Registry {
                 return false;
 	}
 
+	public boolean hasMember(Member member) {
+		return  memberIdToCheckout.containsKey( member.getId());
+	}
+
+	public Map<String, Integer> booksCheckedOutByMember(String memberId) {
+		return  memberIdToCheckout.get( memberId );
+	}
+	
+
  	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
 		if( bookItems.containsKey( bookItem.getBarcode()) && barCodeToCopies.get( bookItem.getBarcode()) != 0 ) {
-			if( memberIdToCheckout.containsKey( member.getId()) 
-				&& memberIdToCheckout.get( member.getId() ).containsKey( bookItem.getBarcode()  ) ) { 
+			if( hasMember( member ) 
+				&& booksCheckedOutByMember( member.getId() ).containsKey( bookItem.getBarcode()  ) ) { 
 					throw new BookAlreadyCheckedoutException();
 			}
-			else if( memberIdToCheckout.get( member.getId()) != null 
-				&& !memberIdToCheckout.get( member.getId()).isEmpty()
-				&& memberIdToCheckout.get( member.getId()).get( bookItem.getBarcode() ) != null
-				&& memberIdToCheckout.get( member.getId()).get( bookItem.getBarcode() ) > MEMBER_CHECKOUT_LIMIT ) 
+			else if( totalCheckedoutBooks( member ) >= MEMBER_CHECKOUT_LIMIT )
 					throw new MemberCheckoutLimitExceededException();
                         else {
 				barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) - 1);

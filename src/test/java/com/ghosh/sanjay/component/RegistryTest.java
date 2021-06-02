@@ -53,12 +53,15 @@ public class RegistryTest {
 
         private Address address1;
         private Address address2;
+	private Address address3;
 
         private Person person1;
         private Person person2;
+	private Person person3;
 
         private Member member1;
         private Member member2;
+	private Member member3;
 
         @BeforeEach
         public void before() {
@@ -69,9 +72,11 @@ public class RegistryTest {
 
                 address1 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
                 address2 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
+		address3 = Address.builder().streetAddress("").city("").state("").zipCode("").country("").build();
 
                 person1 = Person.builder().name("P1").address(address1).email("").phone("").build();
-                person2 = Person.builder().name("P2>").address(address2).email("").phone("").build();
+                person2 = Person.builder().name("P2").address(address2).email("").phone("").build();
+		person3 = Person.builder().name("P3").address(address2).email("").phone("").build();
 
                 member1 = new Member();
                 member1.setId("1");
@@ -83,7 +88,13 @@ public class RegistryTest {
                 member2.setId("2");
                 member2.setPassword("");
                 member2.setStatus(ACTIVE);
-                member2.setPerson(person1);
+                member2.setPerson(person2);
+
+		member3 = new Member();
+                member3.setId("3");
+                member3.setPassword("");
+                member3.setStatus(ACTIVE);
+                member3.setPerson(person3);
         }
 
         @Test
@@ -114,11 +125,18 @@ public class RegistryTest {
 		assertTrue( registry.addMember( member2 ) );
 		assertTrue( registry.addBookItem( bookItem2 ) );
 		assertTrue( registry.checkoutBookItem( bookItem2, member2 ) );
+		assertTrue( registry.checkinBookItem( bookItem2, member2 ) );
         }
 	
 	@Test
 	public void testAddMember() {
 		assertTrue( registry.addMember( member1 ) );
+	}
+
+	@Test
+	public void testHasMember() {
+		assertTrue( registry.addMember( member1 ) );
+		assertNotNull( registry.booksCheckedOutByMember( "1" ) );
 	}
 
 	@Test
@@ -129,10 +147,19 @@ public class RegistryTest {
 
         @Test
         public void testUnBlockMember() {
-		registry.addMember( member1 );
+		assertTrue( registry.addMember( member1 ) );
                 assertTrue( registry.blockMember( member1  ) );
 		assertTrue( registry.unBlockMember( member1 ) );
         }
+
+	@Test
+	public void testRegistryHasMember() {
+		assertTrue( registry.addMember( member1 ) );
+                assertTrue( registry.addMember( member2 ) );
+		assertTrue( registry.hasMember( member1 ) );
+		assertTrue( registry.hasMember( member2 ) );
+		assertFalse( registry.hasMember( member3 ) );
+	}
 
 
 	@Test
@@ -159,8 +186,7 @@ public class RegistryTest {
 		assertTrue( registry.addBookItem( bookItem4 ) );
                 assertTrue( registry.checkoutBookItem( bookItem1, member1 ) );
 		assertTrue( registry.checkoutBookItem( bookItem2, member1 ) );
-		assertTrue( registry.checkoutBookItem( bookItem3, member1 ) );
-		
+		assertTrue( registry.checkoutBookItem( bookItem3, member1 ) );		
                 assertEquals( registry.totalCheckedoutBooks( member1 ), Integer.valueOf(3));
         }
 
