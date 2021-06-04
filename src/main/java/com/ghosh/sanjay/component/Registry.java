@@ -31,6 +31,7 @@ public class Registry {
 		barCodeToCopies.clear();
 		memberIdToFines.clear();
 		memberIdToCheckout.clear();
+		memberIdToBarcode.clear();
 	}
 
 	public BookItem fetchBookDetails(String barcode) {		
@@ -56,7 +57,7 @@ public class Registry {
                 return false;
 	}
 
-	public boolean hasMember(Member member) {
+	public boolean hasMemberCheckedOutBook(Member member) {
 		return  memberIdToCheckout.containsKey( member.getId());
 	}
 
@@ -67,7 +68,7 @@ public class Registry {
 
  	public boolean checkoutBookItem(BookItem bookItem, Member member) throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
 		if( bookItems.containsKey( bookItem.getBarcode()) && barCodeToCopies.get( bookItem.getBarcode()) != 0 ) {
-			if( hasMember( member ) 
+			if( hasMemberCheckedOutBook( member ) 
 				&& booksCheckedOutByMember( member.getId() ).containsKey( bookItem.getBarcode()  ) ) { 
 					throw new BookAlreadyCheckedoutException();
 			}
@@ -87,7 +88,7 @@ public class Registry {
 
 
 	public boolean checkinBookItem(BookItem bookItem, Member member) {
-		if( memberIdToCheckout.containsKey( member.getId()) && memberIdToCheckout.get( member.getId() ).containsKey( bookItem.getBarcode() ) ) {
+		if( hasMemberCheckedOutBook( member ) && booksCheckedOutByMember( member.getId() ).containsKey( bookItem.getBarcode() ) ) {
 			barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) + 1);
 			memberIdToCheckout.put(member.getId(), memberIdToCheckout.get(member.getId()));
 			memberIdToBarcode.put(member.getId(), bookItem.getBarcode());
@@ -99,7 +100,7 @@ public class Registry {
 	public boolean addMember(Member member) {
 		if(!members.containsKey(member.getId())) {
                         members.put(member.getId(), member);
-			memberIdToBarcode.put(member.getId(), "");
+			memberIdToBarcode.put(member.getId(), null);
 			memberIdToCheckout.put(member.getId(), new HashMap<>());
                         return true;
                 }

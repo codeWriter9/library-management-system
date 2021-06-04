@@ -156,9 +156,9 @@ public class RegistryTest {
 	public void testRegistryHasMember() {
 		assertTrue( registry.addMember( member1 ) );
                 assertTrue( registry.addMember( member2 ) );
-		assertTrue( registry.hasMember( member1 ) );
-		assertTrue( registry.hasMember( member2 ) );
-		assertFalse( registry.hasMember( member3 ) );
+		assertTrue( registry.hasMemberCheckedOutBook( member1 ) );
+		assertTrue( registry.hasMemberCheckedOutBook( member2 ) );
+		assertFalse( registry.hasMemberCheckedOutBook( member3 ) );
 	}
 
 
