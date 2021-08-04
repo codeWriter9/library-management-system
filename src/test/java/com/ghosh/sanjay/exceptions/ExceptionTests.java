@@ -12,6 +12,7 @@ import com.ghosh.sanjay.beans.Person;
 import com.ghosh.sanjay.component.Ledger;
 import com.ghosh.sanjay.component.Registry;
 
+import com.ghosh.sanjay.repositories.BookCatalogueRepository;
 import com.ghosh.sanjay.service.BookLendingService;
 import com.ghosh.sanjay.service.BookCatalogService;
 import com.ghosh.sanjay.util.BookLendingUtil;
@@ -23,11 +24,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, Registry.class, Ledger.class, BookCatalogService.class, BookLendingUtil.class})
+@ContextConfiguration(classes = {BookLendingService.class, Registry.class, Ledger.class,
+        BookCatalogService.class, BookLendingUtil.class, BookCatalogueRepository.class})
 public class ExceptionTests {
 
     @Autowired
@@ -44,6 +47,9 @@ public class ExceptionTests {
 
     @Autowired
     private BookLendingUtil bookLendingUtil;
+
+    @MockBean
+    private BookCatalogueRepository bookCatalogueRepository;
 
     private BookItem bookItem1;
     private BookItem bookItem2;
@@ -127,7 +133,7 @@ public class ExceptionTests {
     }
 
     @Test
-    public void testBookFinePending() throws BookFinePendingException {
+    public void testBookFinePending() {
     }
 
 

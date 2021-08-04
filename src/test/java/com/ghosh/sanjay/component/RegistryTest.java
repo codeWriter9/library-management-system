@@ -15,6 +15,7 @@ import com.ghosh.sanjay.exceptions.BookNotFoundException;
 import com.ghosh.sanjay.exceptions.MemberCheckoutLimitExceededException;
 
 
+import com.ghosh.sanjay.repositories.BookCatalogueRepository;
 import org.junit.jupiter.api.BeforeEach;
 
 import org.junit.jupiter.api.AfterEach;
@@ -24,16 +25,20 @@ import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {Registry.class})
+@ContextConfiguration(classes = {Registry.class, BookCatalogueRepository.class})
 public class RegistryTest {
 
     @Autowired
     private Registry registry;
+
+    @MockBean
+    private BookCatalogueRepository bookCatalogueRepository;
 
     private BookItem bookItem1;
     private BookItem bookItem2;
@@ -180,7 +185,7 @@ public class RegistryTest {
     }
 
     @Test
-    public void testSearchBook() throws BookNotFoundException {
+    public void testSearchBook() {
         assertTrue(registry.addBookItem(bookItem1));
         assertTrue(registry.isBookAvailable(bookItem1.getBarcode()));
     }

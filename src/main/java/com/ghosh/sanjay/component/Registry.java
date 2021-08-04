@@ -12,10 +12,15 @@ import com.ghosh.sanjay.exceptions.MemberCheckoutLimitExceededException;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.ghosh.sanjay.repositories.BookCatalogueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Registry {
+
+    @Autowired
+    private BookCatalogueRepository bookCatalogueRepository;
 
     private Map<String, BookItem> bookItems = new HashMap<>();
     private Map<String, Member> members = new HashMap<>();
@@ -39,9 +44,7 @@ public class Registry {
 
     public boolean isBookAvailable(String barcode) {
         if (barcode != null && !"".equals(barcode)) {
-            if (bookItems.get(barcode) != null) {
-                return true;
-            }
+            if (bookItems.get(barcode) != null) return true;
         }
         return false;
     }
@@ -75,7 +78,7 @@ public class Registry {
             else {
                 barCodeToCopies.put(bookItem.getBarcode(), barCodeToCopies.get(bookItem.getBarcode()) - 1);
                 memberIdToBarcode.put(bookItem.getBarcode(), member.getId());
-                Map booksForMemberId = memberIdToCheckout.get(member.getId());
+                Map<String, Integer> booksForMemberId = memberIdToCheckout.get(member.getId());
                 booksForMemberId.put(bookItem.getBarcode(), 1);
                 memberIdToCheckout.put(member.getId(), booksForMemberId);
             }
@@ -125,7 +128,7 @@ public class Registry {
 
     public Integer totalCheckedoutBooks(Member member) {
         if (memberIdToCheckout.containsKey(member.getId())) {
-            Integer sum = 0;
+            int sum = 0;
             for (String barcode : memberIdToCheckout.get(member.getId()).keySet()) {
                 sum = sum + memberIdToCheckout.get(member.getId()).get(barcode);
             }

@@ -17,6 +17,7 @@ import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
 import com.ghosh.sanjay.exceptions.BookFinePendingException;
 import com.ghosh.sanjay.exceptions.BookNotFoundException;
 import com.ghosh.sanjay.exceptions.MemberCheckoutLimitExceededException;
+import com.ghosh.sanjay.repositories.BookCatalogueRepository;
 import com.ghosh.sanjay.util.BookLendingUtil;
 
 
@@ -27,11 +28,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookLendingService.class, BookLendingUtil.class, Registry.class, Ledger.class})
+@ContextConfiguration(classes = {BookLendingService.class, BookLendingUtil.class, Registry.class, Ledger.class, BookCatalogueRepository.class})
 public class BookLendingServiceTest {
 
     @Autowired
@@ -45,6 +47,9 @@ public class BookLendingServiceTest {
 
     @Autowired
     private BookLendingUtil bookLendingUtil;
+
+    @MockBean
+    private BookCatalogueRepository bookCatalogueRepository;
 
     private BookItem bookItem1;
     private BookItem bookItem2;
@@ -118,7 +123,7 @@ public class BookLendingServiceTest {
     }
 
     @Test
-    public void testCheckinBookItemPendingFine() throws BookAlreadyCheckedoutException, BookFinePendingException, MemberCheckoutLimitExceededException {
+    public void testCheckinBookItemPendingFine() throws BookAlreadyCheckedoutException, MemberCheckoutLimitExceededException {
         assertTrue(registry.addMember(member1));
         assertTrue(registry.addMember(member2));
         assertTrue(registry.addBookItem(bookItem2));
@@ -141,7 +146,7 @@ public class BookLendingServiceTest {
     }
 
     @Test
-    public void testSearchBook() throws BookNotFoundException {
+    public void testSearchBook() {
         assertTrue(registry.addBookItem(bookItem1));
         assertTrue(bookLendingService.isBookAvailable(bookItem1.getBarcode()));
     }

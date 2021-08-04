@@ -10,20 +10,19 @@ import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
 import com.ghosh.sanjay.component.Registry;
 
-import java.io.IOException;
-
-
+import com.ghosh.sanjay.repositories.BookCatalogueRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {BookCatalogService.class, Registry.class})
+@ContextConfiguration(classes = {BookCatalogService.class, Registry.class, BookCatalogueRepository.class})
 public class BookCatalogServiceTest {
 
     @Autowired
@@ -31,6 +30,9 @@ public class BookCatalogServiceTest {
 
     @Autowired
     private Registry registry;
+
+    @MockBean
+    private BookCatalogueRepository bookCatalogueRepository;
 
     private BookItem bookItem1;
     private BookItem bookItem2;
