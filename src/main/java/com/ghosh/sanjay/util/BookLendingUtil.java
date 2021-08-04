@@ -9,12 +9,12 @@ import com.ghosh.sanjay.beans.BookLending;
 
 public class BookLendingUtil {
 
-	public static BookFine calculateFine(BookLending bookLending) {
-		Double amount = 0.0;
-		if(bookLending.getReturnDate() != null && bookLending.getDueDate() != null) {
-			amount =  DAYS.between(bookLending.getDueDate(), bookLending.getReturnDate()) * BOOK_FINE_PER_DAY;
-		}
-		return BookFine.builder().amount(amount).build();
-	}
+    public static BookFine calculateFine(BookLending bookLending) {
+        Double amount = 0.0;
+        if (bookLending.getReturnDate() != null && bookLending.getDueDate() != null) {
+            amount = DAYS.between(bookLending.getDueDate(), bookLending.getReturnDate()) * BOOK_FINE_PER_DAY;
+        }
+        return BookFine.builder().amount(amount).build();
+    }
 
 }

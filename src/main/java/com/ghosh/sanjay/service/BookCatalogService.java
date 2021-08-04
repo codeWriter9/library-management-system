@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class BookCatalogService {
 
-	@Autowired
-	private Registry registry;
+    @Autowired
+    private Registry registry;
 
-	public boolean addBookItem(BookItem bookItem) {
-		return registry.addBookItem( bookItem );
-	}
+    public boolean addBookItem(BookItem bookItem) {
+        return registry.addBookItem(bookItem);
+    }
 
-	public boolean blockMember(Member member) {	
-		return registry.blockMember( member );
-	}
+    public boolean blockMember(Member member) {
+        return registry.blockMember(member);
+    }
 
-  	public boolean unBlockMember(Member member) {
-		return registry.unBlockMember( member );
-	}
+    public boolean unBlockMember(Member member) {
+        return registry.unBlockMember(member);
+    }
 
 }

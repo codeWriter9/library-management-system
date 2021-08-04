@@ -9,10 +9,10 @@ import lombok.Data;
 @Data
 public class BookLending {
 
-	private ZonedDateTime creationDate;
-	private ZonedDateTime dueDate;
-	private ZonedDateTime returnDate;
-	private String bookItemBarcode;
-	private String memberId;
+    private ZonedDateTime creationDate;
+    private ZonedDateTime dueDate;
+    private ZonedDateTime returnDate;
+    private String bookItemBarcode;
+    private String memberId;
 
 }

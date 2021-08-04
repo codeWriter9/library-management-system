@@ -1,6 +1,6 @@
 package com.ghosh.sanjay.beans;
 
-import java.util.Date;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,6 +8,6 @@ import lombok.Data;
 @Data
 public class BookFine {
 
-	private Double amount;
+    private Double amount;
 
 }

@@ -6,21 +6,17 @@ import static com.ghosh.sanjay.LibraryManagementSystem.main;
 
 import java.io.IOException;
 
-import com.ghosh.sanjay.LibraryManagementSystem;
-import com.ghosh.sanjay.util.BookLendingUtil;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
+
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
 
 
 /**
@@ -31,41 +27,41 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 public class LibraryManagementSystemTest {
 
-	private static Logger LOG = getLogger(lookup().lookupClass());
-	
-
-	@InjectMocks
-	private LibraryManagementSystem application;
+    private static Logger LOG = getLogger(lookup().lookupClass());
 
 
-	@Before
-	public void before() {
-		
-	}
-	
-	@Test
-	public void checkIfThisRuns() throws Exception {
-		try {
-			application.run(new String[] {});
-		} catch (Exception e) {
-			LOG.error(e.getMessage(), e);
-			throw e;
-		}
-	}
+    @InjectMocks
+    private LibraryManagementSystem application;
 
-	@Test
-	public void thisJustChecksIfApplicationStarts() throws IOException {
-		try {
-			main(new String[] {});
-		} catch (IOException e) {
-			LOG.error(e.getMessage(), e);
-			throw e;
-		}
-	}
 
-	@After
-	public void after() {
-	
-	}
+    @Before
+    public void before() {
+
+    }
+
+    @Test
+    public void checkIfThisRuns() throws Exception {
+        try {
+            application.run(new String[]{});
+        } catch (Exception e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @Test
+    public void thisJustChecksIfApplicationStarts() throws IOException {
+        try {
+            main(new String[]{});
+        } catch (IOException e) {
+            LOG.error(e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    @After
+    public void after() {
+
+    }
 
 }
