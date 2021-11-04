@@ -1,36 +1,27 @@
 package com.ghosh.sanjay.component;
 
 import static com.ghosh.sanjay.enums.AccountStatus.ACTIVE;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
 
 
 import com.ghosh.sanjay.actor.Member;
-
 import com.ghosh.sanjay.beans.Address;
 import com.ghosh.sanjay.beans.BookItem;
 import com.ghosh.sanjay.beans.Person;
 import com.ghosh.sanjay.exceptions.BookAlreadyCheckedoutException;
-import com.ghosh.sanjay.exceptions.BookNotFoundException;
 import com.ghosh.sanjay.exceptions.MemberCheckoutLimitExceededException;
 
 
 import com.ghosh.sanjay.repositories.BookCatalogueRepository;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.AfterEach;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
-
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)

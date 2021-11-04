@@ -20,17 +20,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>8</maven.compiler.source>
 		<maven.compiler.target>8</maven.compiler.target>
-		<spring-boot-version>2.5.2</spring-boot-version>
+		<spring-boot-version>2.5.6</spring-boot-version>
 		<fasterxml-jackson-version>2.12.0</fasterxml-jackson-version>
+		<fox-swagger-version>LATEST</fox-swagger-version>
+		<spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
+		<springfox.version>3.0.0</springfox.version>
 	</properties>
 
-
-
-
 	<name>library-management-system</name>
-	<url>http://www.example.com</url>
-
-
 
 	<dependencies>
 		<dependency>
@@ -88,7 +85,23 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>${fasterxml-jackson-version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-bean-validators</artifactId>
+			<version>${fox-swagger-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${fox-swagger-version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${fox-swagger-version}</version>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -98,52 +111,6 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<version>${spring-boot-version}</version>
 			</plugin>
-			<!--
-			<plugin>
- 				<artifactId>maven-resources-plugin</artifactId>
-				<version>3.0.2</version>
-				<executions>
-				      <execution>
-				      <id>copy-resources</id>
-				      <phase>install</phase>
-				      <goals>
-				          <goal>copy-resources</goal>
-				      </goals>
-				      <configuration>
-				          <outputDirectory>${basedir}/code-coverage</outputDirectory>
-				          <resources>
-				            <resource>
-				                <directory>${basedir}/target/site/jacoco</directory>
-						<includes>
-						    <include>jacoco.csv</include>
-						</includes>
-				            </resource>
-				          </resources>
-				        </configuration>
-			      </execution>
-			    </executions>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.4</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>AccountTest
-			</plugin>
-			-->
 		</plugins>
 	</build>
-
 </project>

@@ -1,24 +1,20 @@
 package com.ghosh.sanjay;
 
-import static java.lang.invoke.MethodHandles.lookup;
-import static org.slf4j.LoggerFactory.getLogger;
-
 import java.io.IOException;
 
-import org.slf4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@Slf4j
 public class LibraryManagementSystem implements CommandLineRunner {
-
-    private static Logger LOG = getLogger(lookup().lookupClass());
 
 
     @Override
     public void run(String... args) {
-        LOG.info("---Library--Management-System---");
+        log.info("---Library--Management-System---");
     }
 
     public static void main(String[] args) throws IOException {
