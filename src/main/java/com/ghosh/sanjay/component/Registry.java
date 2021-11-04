@@ -53,6 +53,7 @@ public class Registry {
     public boolean addBookItem(BookItem bookItem) {
         if (!bookItems.containsKey(bookItem.getBarcode())) {
             bookItems.put(bookItem.getBarcode(), bookItem);
+            bookCatalogueRepository.save(bookItem);
             barCodeToCopies.put(bookItem.getBarcode(), bookItem.getCopies());
             return true;
         }
